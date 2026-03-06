@@ -95,7 +95,7 @@ export const CountrySelectorAdornment = ({
     <InputAdornment position="start">
       {native ? (
         <NativeSelect
-          id="country-menu"
+          id="country-native-select"
           value={selectedCountry?.iso2 ?? ""}
           onChange={handleNativeSelectChange}
           disableUnderline
