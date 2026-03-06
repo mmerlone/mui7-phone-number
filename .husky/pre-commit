@@ -1,2 +1,9 @@
-#!/usr/bin/env sh
-pnpm lint && pnpm type-check
+# Exit on any error
+set -e
+
+echo "🔍 Running pre-commit checks..."
+
+pnpm lint || exit 1
+npx tsc --noEmit || exit 1
+
+echo "✅ Pre-commit checks passed!"
