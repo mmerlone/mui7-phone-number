@@ -15,6 +15,7 @@ dist-demo/
 build/
 .vite/
 *.tsbuildinfo
+*.tgz
 
 # Test & Coverage
 coverage/
