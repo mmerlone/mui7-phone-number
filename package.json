@@ -1,11 +1,11 @@
 {
-  "name": "mui7-phone-number",
-  "version": "0.0.1",
-  "description": "A material-ui v7+ react component to format phone numbers. Based on react-phone-input-2 and mui-phone-number",
-  "type": "module",
+  "name": "@merlone/mui7-phone-number",
+  "version": "1.0.0",
+  "description": "Phone number input component compatible with MUI v7",
   "main": "dist/index.js",
-  "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
+  "module": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -38,6 +38,7 @@
   },
   "homepage": "https://github.com/mmerlone/mui7-phone-number",
   "devDependencies": {
+    "@eslint/js": "^9.39.3",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
