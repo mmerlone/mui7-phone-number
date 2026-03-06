@@ -124,6 +124,12 @@ interface CountryData {
 }
 ```
 
+### Keyboard
+
+| Prop | Type | Description |
+|---|---|---|
+| `keys` | `Partial<KeyboardKeys>` | Remap the keyboard shortcuts used inside the component (see [Keyboard customisation](#keyboard-customisation)) |
+
 ### Keyboard customisation
 
 The `keys` prop lets you remap the keyboard shortcuts used inside the component (defaults shown):
@@ -149,14 +155,14 @@ Pass a single string or an array to `regions` to restrict the country list.
 
 **Regions:** `'america'` · `'europe'` · `'asia'` · `'oceania'` · `'africa'`
 
-**Subregions:** `'north-america'` · `'south-america'` · `'central-america'` · `'carribean'` · `'european-union'` · `'ex-ussr'` · `'middle-east'` · `'north-africa'`
+**Subregions:** `'north-america'` · `'south-america'` · `'central-america'` · `'caribbean'` · `'european-union'` · `'ex-ussr'` · `'middle-east'` · `'north-africa'`
 
 ```tsx
 // Single region
 <MuiPhoneNumber defaultCountry="it" regions="europe" />
 
 // Multiple subregions
-<MuiPhoneNumber defaultCountry="ca" regions={['north-america', 'carribean']} />
+<MuiPhoneNumber defaultCountry="ca" regions={['north-america', 'caribbean']} />
 ```
 
 ## Localization
