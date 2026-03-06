@@ -1,5 +1,5 @@
 {
-  "name": "@merlone/mui7-phone-number",
+  "name": "@mmerlone/mui7-phone-number",
   "version": "1.0.0",
   "description": "Phone number input component compatible with MUI v7",
   "main": "dist/index.js",
