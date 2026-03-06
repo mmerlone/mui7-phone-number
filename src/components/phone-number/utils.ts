@@ -16,6 +16,9 @@ export interface FormatNumberParams {
  *   (enableLongNumbers will append the overflow).
  */
 const selectPattern = (patterns: string[], digitCount: number): string => {
+  if (patterns.length === 0) {
+    return "";
+  }
   const ranked = patterns
     .map((p) => ({ p, dots: (p.match(/\./g) ?? []).length }))
     .sort((a, b) => a.dots - b.dots);
