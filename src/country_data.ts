@@ -263,7 +263,7 @@ const rawAllCountries: CountryRawData[] = [
     "Luxembourg",
     ["europe", "european-union"],
     "lu",
-    "235",
+    "352",
     "+.. . ... ... ...",
   ],
   ["Macau", ["asia"], "mo", "853"],
@@ -375,13 +375,7 @@ const rawAllCountries: CountryRawData[] = [
   ["Uganda", ["africa"], "ug", "256"],
   ["Ukraine", ["europe", "ex-ussr"], "ua", "380", "+... (..) ... .. .."],
   ["United Arab Emirates", ["middle-east"], "ae", "971"],
-  [
-    "United Kingdom",
-    ["europe", "european-union"],
-    "gb",
-    "44",
-    "+.. .... ......",
-  ],
+  ["United Kingdom", ["europe"], "gb", "44", "+.. .... ......"],
   [
     "United States",
     ["america", "north-america"],
