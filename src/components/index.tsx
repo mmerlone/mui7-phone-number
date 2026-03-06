@@ -46,7 +46,10 @@ const MaterialUiPhoneNumber = forwardRef<HTMLDivElement, PhoneNumberProps>(
     } = usePhoneNumberState(props);
 
     const isError = useMemo(
-      () => error || !isValidNumber(state.formattedNumber.replace(/\D/g, "")),
+      () =>
+        error ||
+        (state.formattedNumber.length > 0 &&
+          !isValidNumber(state.formattedNumber.replace(/\D/g, ""))),
       [error, isValidNumber, state.formattedNumber],
     );
 
