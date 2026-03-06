@@ -48,7 +48,6 @@ export default [
       eqeqeq: ["error", "always"],
       curly: ["error", "multi-line"],
     },
-    /* Test files - relaxed rules */
   },
 
   /* React + JSX files */
@@ -78,7 +77,7 @@ export default [
       "react/prop-types": "error",
       "react/no-deprecated": "error",
 
-      // Disable exhaustive-deps to allow ref access without dependencies
+      // Enforce exhaustive-deps for hook dependency correctness
       "react-hooks/exhaustive-deps": "error",
     },
   },
