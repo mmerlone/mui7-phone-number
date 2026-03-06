@@ -118,7 +118,7 @@ const App = (): React.JSX.Element => {
           onlyCountries: ["de", "es", "fr"],
           localization: {
             Germany: "Deutschland",
-            Spain: "Espana",
+            Spain: "España",
             France: "France",
           },
         },
