@@ -62,9 +62,9 @@ const shouldEnableLogging = !isProduction;
 const maskEmail = (email: string): string => {
   if (!email || typeof email !== "string" || !email.includes("@")) return email;
 
-  const parts = email.split("@");
-  const localPart = parts[0];
-  const domain = parts[1];
+  const atIndex = email.indexOf("@");
+  const localPart = email.substring(0, atIndex);
+  const domain = email.substring(atIndex + 1);
 
   if (!localPart || !domain) return "***";
 
