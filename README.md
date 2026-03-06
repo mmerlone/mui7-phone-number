@@ -1,4 +1,4 @@
-# mui7-phone-number
+# @merlone/mui7-phone-number
 
 A phone number input component for [MUI v7+](https://mui.com/) with auto-formatting, country selection, and full TypeScript support.
 
@@ -14,9 +14,9 @@ This is a fork of [mui-phone-number](https://github.com/alexplumb/material-ui-ph
 ## Installation
 
 ```sh
-npm install mui7-phone-number
+npm install @merlone/mui7-phone-number
 # or
-pnpm add mui7-phone-number
+pnpm add @merlone/mui7-phone-number
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ pnpm add mui7-phone-number
 ### Uncontrolled
 
 ```tsx
-import MuiPhoneNumber from 'mui7-phone-number';
+import MuiPhoneNumber from '@merlone/mui7-phone-number';
 
 function MyForm() {
   return (
@@ -43,7 +43,7 @@ function MyForm() {
 
 ```tsx
 import { useState } from 'react';
-import MuiPhoneNumber from 'mui7-phone-number';
+import MuiPhoneNumber from '@merlone/mui7-phone-number';
 
 function MyForm() {
   const [phone, setPhone] = useState('');
