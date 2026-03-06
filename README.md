@@ -1,229 +1,185 @@
-# mui-phone-number
+# mui7-phone-number
 
-> **_NOTE:_**  I started this library because material-ui-phone-number took some time to upgrade to Material-ui v5. Now that some people are using this library, I feel like I should keep it up even if material-ui-phone-number has done a great job at upgrading and maintaning its library. I suggest you switch to material-ui-phone-number or if you feel like helping me maintaining this lib, let me know!. Thanks.
+A phone number input component for [MUI v7+](https://mui.com/) with auto-formatting, country selection, and full TypeScript support.
 
-Highly customizable phone input component with auto formatting. Based on the wonderful [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2) package.
+Built on top of `@mui/material/TextField`, rendering a country flag selector as a start adornment alongside the formatted phone input.
 
-It looks like this, but in Material Design:
+This is a fork of [mui-phone-number](https://github.com/alexplumb/material-ui-phone-number) updated to support MUI v7, React 19, and modern TypeScript.
 
-![alt tag](https://media.giphy.com/media/l378A8qFNzgiuPUre/giphy.gif)
+## Requirements
 
-Uses @mui/material/TextField for rendering the phone input
+- React 19+
+- `@mui/material` v7+
 
 ## Installation
 
-```shell-script
-npm install mui-phone-number --save
+```sh
+npm install mui7-phone-number
+# or
+pnpm add mui7-phone-number
 ```
 
 ## Usage
 
-```jsx
-import MuiPhoneNumber from 'mui-phone-number';
+### Uncontrolled
 
-React.render(
-  <MuiPhoneNumber defaultCountry={'us'} onChange={handleOnChange}/>,
-  document.getElementById('root')
-);
-```
+```tsx
+import MuiPhoneNumber from 'mui7-phone-number';
 
-Your handler for the ``onChange`` event should expect a string as
-parameter, where the value is that of the entered phone number. For example:
-
-```jsx
-function handleOnChange(value) {
-   this.setState({
-      phone: value
-   });
+function MyForm() {
+  return (
+    <MuiPhoneNumber
+      defaultCountry="us"
+      onChange={(value, country) => {
+        console.log(value);   // e.g. "+1 (702) 123-4567"
+        console.log(country); // { name, dialCode, countryCode }
+      }}
+    />
+  );
 }
 ```
 
-## Options
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-    <th> Description </th>
-    <th> Example </th>
-  </tr>
-  <tr>
-    <td> excludeCountries </td>
-    <td> array </td>
-    <td> array of country codes to be excluded </td>
-    <td> ['cu','cw','kz'] </td>
-  </tr>
-  <tr>
-    <td> onlyCountries </td>
-    <td> array </td>
-    <td> country codes to be included </td>
-    <td> ['cu','cw','kz'] </td>
-  </tr>
-  <tr>
-    <td> preferredCountries </td>
-    <td> array </td>
-    <td> country codes to be at the top </td>
-    <td> ['cu','cw','kz'] </td>
-  </tr>
-  <tr>
-    <td> defaultCountry </td>
-    <td> string </td>
-    <td> initial country </td>
-    <td> 'us' </td>
-  </tr>
+### Controlled
 
-  <tr>
-    <td> inputClass </td>
-    <td> string </td>
-    <td colspan="2"> class for input </td>
-  </tr>
-  <tr>
-    <td> dropdownClass </td>
-    <td> string </td>
-    <td colspan="2"> class for dropdown container </td>
-  </tr>
+```tsx
+import { useState } from 'react';
+import MuiPhoneNumber from 'mui7-phone-number';
 
-  <tr>
-    <td> autoFormat </td>
-    <td> bool </td>
-    <td colspan="2"> on/off auto formatting, true by default </td>
-  </tr>
-  <tr>
-    <td> disableAreaCodes </td>
-    <td> bool </td>
-    <td colspan="2"> disable local codes for all countries </td>
-  </tr>
-  <tr>
-    <td> disableCountryCode </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> disableDropdown </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> enableLongNumbers </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> countryCodeEditable </td>
-    <td> bool </td>
-    <td colspan="2"> true by default </td>
-  </tr>
+function MyForm() {
+  const [phone, setPhone] = useState('');
 
-  <tr>
-    <td colspan="4"><b>Supported TextField props</b></td>
-  </tr>
+  return (
+    <MuiPhoneNumber
+      defaultCountry="us"
+      value={phone}
+      onChange={(value) => setPhone(value)}
+    />
+  );
+}
+```
 
-  <tr>
-    <td colspan="4">See TextField API for possible values https://mui.com/api/text-field/</td>
-  </tr>
-</table>
+## Props
 
-### Regions
+### Country selection
 
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-    <th> Description </th>
-  </tr>
-  <tr>
-    <td> regions </td>
-    <td> array/string </td>
-    <td> to only show codes from selected regions </td>
-  </tr>
-</table>
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `defaultCountry` | `string` | `""` | Initial country (ISO 3166-1 alpha-2, e.g. `"us"`) |
+| `onlyCountries` | `string[]` | — | Restrict to these country codes |
+| `excludeCountries` | `string[]` | — | Exclude these country codes |
+| `preferredCountries` | `string[]` | — | Pin these countries to the top of the dropdown |
+| `regions` | `string \| string[]` | — | Filter by region or subregion (see [Regions](#regions)) |
 
-<table>
-  <tr>
-    <th> Regions </th>
-  </tr>
-  <tr>
-    <td> ['america', 'europe', 'asia', 'oceania', 'africa'] </td>
-  </tr>
-  <tr>
-    <th> Subregions </th>
-  </tr>
-  <tr>
-    <td> ['north-america', 'south-america', 'central-america', 'carribean', 'european-union', 'ex-ussr', 'middle-east', 'north-africa'] </td>
-  </tr>
-</table>
+### Input behaviour
 
-Regions selected: {'europe'}
-```jsx
-<MuiPhoneInput
-  defaultCountry='it'
-  regions={'europe'}
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Controlled value |
+| `placeholder` | `string` | `"+1 (702) 123-4567"` | Input placeholder |
+| `autoFormat` | `boolean` | `true` | Auto-format the number as the user types |
+| `disableAreaCodes` | `boolean` | `false` | Disable area code sub-entries |
+| `disableCountryCode` | `boolean` | `false` | Hide the dial code prefix in the input |
+| `disableDropdown` | `boolean` | `false` | Render the flag without a clickable dropdown |
+| `enableLongNumbers` | `boolean` | `false` | Allow numbers longer than the country format |
+| `countryCodeEditable` | `boolean` | `true` | Allow the user to edit the country code portion |
+| `localization` | `Record<string, string>` | — | Override country display names (e.g. `{ Germany: 'Deutschland' }`) |
+| `native` | `boolean` | `false` | Use a native `<select>` for the country dropdown |
+
+### Validation
+
+| Prop | Type | Description |
+|---|---|---|
+| `error` | `boolean` | Force error state on the TextField |
+| `isValid` | `(inputNumber: string) => boolean` | Custom validation — receives the raw digits. The field shows an error when this returns `false` |
+
+### TextField passthrough
+
+| Prop | Type | Description |
+|---|---|---|
+| `variant` | `"standard" \| "outlined" \| "filled"` | MUI TextField variant (default: `"standard"`) |
+| `disabled` | `boolean` | Disable the input |
+| `inputClass` | `string` | Class name applied to the TextField root |
+| `dropdownClass` | `string` | Class name applied to the country dropdown container |
+| `slotProps` | `{ input?, htmlInput? }` | MUI v7 `slotProps` forwarded to the TextField |
+| `inputRef` | `Ref<HTMLInputElement>` | Ref forwarded to the underlying `<input>` element |
+
+### Events
+
+| Prop | Signature | Notes |
+|---|---|---|
+| `onChange` | `(value: string, country: CountryData) => void` | Fires on every input change |
+| `onFocus` | `(event, country: CountryData) => void` | — |
+| `onBlur` | `(event, country: CountryData) => void` | — |
+| `onClick` | `(event, country: CountryData) => void` | — |
+| `onKeyDown` | `(event) => void` | `CountryData` is not provided here |
+| `onEnterKeyPress` | `(event) => void` | Convenience handler for the Enter key |
+
+The `CountryData` object shape:
+
+```ts
+interface CountryData {
+  name: string;
+  dialCode: string;
+  countryCode: string; // ISO 3166-1 alpha-2
+}
+```
+
+### Keyboard customisation
+
+The `keys` prop lets you remap the keyboard shortcuts used inside the component (defaults shown):
+
+```ts
+{
+  UP: 'ArrowUp',
+  DOWN: 'ArrowDown',
+  RIGHT: 'ArrowRight',
+  LEFT: 'ArrowLeft',
+  ENTER: 'Enter',
+  ESC: 'Escape',
+  PLUS: '+',
+  A: 'a',
+  Z: 'z',
+  SPACE: ' ',
+}
+```
+
+## Regions
+
+Pass a single string or an array to `regions` to restrict the country list.
+
+**Regions:** `'america'` · `'europe'` · `'asia'` · `'oceania'` · `'africa'`
+
+**Subregions:** `'north-america'` · `'south-america'` · `'central-america'` · `'carribean'` · `'european-union'` · `'ex-ussr'` · `'middle-east'` · `'north-africa'`
+
+```tsx
+// Single region
+<MuiPhoneNumber defaultCountry="it" regions="europe" />
+
+// Multiple subregions
+<MuiPhoneNumber defaultCountry="ca" regions={['north-america', 'carribean']} />
+```
+
+## Localization
+
+```tsx
+<MuiPhoneNumber
+  onlyCountries={['de', 'es']}
+  localization={{ Germany: 'Deutschland', Spain: 'España' }}
 />
 ```
 
-Regions selected: {['north-america', 'carribean']}
-```jsx
-<MuiPhoneInput
-  defaultCountry='ca'
-  regions={['north-america', 'carribean']}
-/>
+## Ref forwarding
+
+The component forwards its `ref` to the MUI `TextField` root `<div>`. Use `inputRef` to access the underlying `<input>` element.
+
+```tsx
+const inputRef = useRef<HTMLInputElement>(null);
+
+<MuiPhoneNumber defaultCountry="us" inputRef={inputRef} />
 ```
-
-### Localization
-
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-  </tr>
-  <tr>
-    <td> localization </td>
-    <td> object </td>
-  </tr>
-</table>
-
-```jsx
-<MuiPhoneInput
-  onlyCountries=['de', 'es']
-  localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
-/>
-```
-
-### Supported events
-
-<table>
-  <tr>
-    <td> onChange </td>
-    <td> onFocus </td>
-    <td> onBlur </td>
-    <td> onClick </td>
-    <td> onKeyDown </td>
-  </tr>
-</table>
-
-Country data object not returns from onKeyDown event
-
-<table>
-  <tr>
-    <th> Data </th>
-    <th> Type </th>
-    <th> Description </th>
-  </tr>
-  <tr>
-    <td> value/event </td>
-    <td> string/object </td>
-    <td> the event or the phone number </td>
-  </tr>
-  <tr>
-    <td> country data </td>
-    <td> object </td>
-    <td> the country object { name, dialCode, country code (iso2 format) } </td>
-  </tr>
-</table>
 
 ## License
 
-Based on [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2)
+MIT
 
-Based on [react-phone-input](https://github.com/razagill/react-phone-input) using [MIT](https://opensource.org/licenses/MIT)\
-
-Based on [material-ui-phone-number](https://github.com/alexplumb/material-ui-phone-number)
+Based on [material-ui-phone-number](https://github.com/alexplumb/material-ui-phone-number), [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2), [react-phone-input](https://github.com/razagill/react-phone-input) and [mui-phone-number](https://github.com/phrensoua/mui-phone-number).
