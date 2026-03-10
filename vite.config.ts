@@ -18,42 +18,22 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
-      name: "MuiPhoneNumber",
       fileName: "index",
-      formats: ["es", "umd"],
+      formats: ["es"],
     },
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "@mui/material",
-        "@mui/material/TextField",
-        "@mui/material/InputAdornment",
-        "@mui/material/IconButton",
-        "@mui/material/Menu",
-        "@mui/material/Divider",
-        "@mui/material/NativeSelect",
-        "@mui/material/MenuItem",
-        "@emotion/react",
-        "@emotion/styled",
-        "country-flag-icons",
-      ],
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-          "@mui/material": "MUI",
-          "@mui/material/TextField": "MUI.TextField",
-          "@mui/material/InputAdornment": "MUI.InputAdornment",
-          "@mui/material/IconButton": "MUI.IconButton",
-          "@mui/material/Menu": "MUI.Menu",
-          "@mui/material/Divider": "MUI.Divider",
-          "@mui/material/NativeSelect": "MUI.NativeSelect",
-          "@mui/material/MenuItem": "MUI.MenuItem",
-          "@emotion/react": "emotionReact",
-          "@emotion/styled": "emotionStyled",
-          "country-flag-icons": "CountryFlagIcons",
-        },
+      external: (id: string): boolean => {
+        // Externalize all peer dependencies and their subpaths so that the
+        // host app's single instances of React, MUI, and Emotion are used
+        // at runtime.  This prevents bundling @mui/system, @mui/styled-engine,
+        // @mui/material/SvgIcon, etc. which would create a duplicate default
+        // theme and break dark-mode in consuming apps.
+        return (
+          /^react(-dom)?(\/|$)/.test(id) ||
+          /^@mui\//.test(id) ||
+          /^@emotion\//.test(id) ||
+          /^country-flag-icons(\/|$)/.test(id)
+        );
       },
     },
     sourcemap: true,
