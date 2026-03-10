@@ -9,5 +9,5 @@
     "demo/**/*.tsx",
     "demo/vite.config.ts"
   ],
-  "exclude": ["node_modules", "dist", "dist-demo"]
+  "exclude": ["node_modules", "dist", "demo/dist"]
 }

@@ -17,7 +17,7 @@ export default defineConfig({
     port: 3000,
   },
   build: {
-    outDir: path.resolve(demoDir, "../dist-demo"),
+    outDir: path.resolve(demoDir, "dist"),
     emptyOutDir: true,
   },
 });
