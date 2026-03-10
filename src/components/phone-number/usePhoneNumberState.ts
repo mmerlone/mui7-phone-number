@@ -33,20 +33,48 @@ const SUPPORTS_SELECTION_RANGE =
   typeof document !== "undefined" &&
   Boolean(document.createElement("input").setSelectionRange);
 
+/**
+ * Return type of the {@link usePhoneNumberState} hook.
+ *
+ * Provides the component state, a ref to the `<input>` element,
+ * a validation helper, and all event handlers needed by the phone number UI.
+ */
 export interface UsePhoneNumberStateResult {
+  /** Current phone number component state. */
   state: PhoneNumberState;
+  /** Ref to the underlying `<input>` DOM element. */
   inputRefElement: RefObject<HTMLInputElement | null>;
+  /** Returns `true` if the given digit string matches a known dial code prefix. */
   isValidNumber: (inputNumber: string) => boolean;
+  /** Handles `<input>` change events — formats the number and detects the country. */
   handleInput: (event: ChangeEvent<HTMLInputElement>) => void;
+  /** Handles `<input>` focus — auto-fills the dial code when the field is empty. */
   handleInputFocus: (event: FocusEvent<HTMLInputElement>) => void;
+  /** Handles `<input>` blur — forwards to the consumer's `onBlur` callback with country context. */
   handleInputBlur: (event: FocusEvent<HTMLInputElement>) => void;
+  /** Forwards click events to the consumer's `onClick` callback with country context. */
   handleInputClick: (event: MouseEvent<HTMLInputElement>) => void;
+  /** Forwards keydown events to the consumer's `onKeyDown` callback. */
   handleInputKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
+  /** Opens the country selector dropdown (sets the menu anchor element). */
   handleOpen: (event: MouseEvent<HTMLElement>) => void;
+  /** Closes the country selector dropdown. */
   handleClose: () => void;
+  /** Selects a country from the dropdown and reformats the number. */
   handleFlagItemClick: (country: Country) => void;
 }
 
+/**
+ * Core state-management hook for the phone number input.
+ *
+ * Handles country detection, number formatting, cursor management,
+ * controlled/uncontrolled value synchronization, and all user-interaction
+ * event handlers. The returned object is consumed by the
+ * {@link MaterialUiPhoneNumber} component.
+ *
+ * @param props - Phone number component props.
+ * @returns State, ref, validation helper, and event handlers.
+ */
 export const usePhoneNumberState = (
   props: PhoneNumberProps,
 ): UsePhoneNumberStateResult => {
@@ -431,7 +459,6 @@ export const usePhoneNumberState = (
         formattedNumber: needsDialCode
           ? `+${selectedCountry!.dialCode}`
           : prevState.formattedNumber,
-        placeholder: "",
       }));
 
       if (onFocus) {
@@ -445,18 +472,11 @@ export const usePhoneNumberState = (
 
   const handleInputBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>): void => {
-      if (!event.target.value) {
-        setState((prevState: PhoneNumberState) => ({
-          ...prevState,
-          placeholder,
-        }));
-      }
-
       if (onBlur) {
         onBlur(event, getCountryData(stateRef.current.selectedCountry));
       }
     },
-    [onBlur, placeholder],
+    [onBlur],
   );
 
   const handleInputClick = useCallback(

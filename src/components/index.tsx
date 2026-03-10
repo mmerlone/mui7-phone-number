@@ -9,30 +9,58 @@ import { usePhoneNumberState } from "./phone-number/usePhoneNumberState";
 const EMPTY_LOCALIZATION: Record<string, string> = {};
 const EMPTY_SLOT_PROPS: NonNullable<PhoneNumberProps["slotProps"]> = {};
 
+/**
+ * MUI-based international phone number input with country selector.
+ *
+ * Wraps a MUI `TextField` with dial-code-based country matching, number formatting,
+ * and a flag-based country dropdown. Supports controlled and uncontrolled modes,
+ * native `<select>` fallback, and forwards all remaining `TextFieldProps` to the
+ * inner `TextField` via spread.
+ *
+ * @see {@link PhoneNumberProps} for accepted props.
+ *
+ * @example
+ * ```tsx
+ * import MuiPhoneNumber from '@mmerlone/mui7-phone-number'
+ *
+ * <MuiPhoneNumber
+ *   defaultCountry="us"
+ *   onChange={(value, country) => console.log(value, country)}
+ * />
+ * ```
+ */
 const MaterialUiPhoneNumber = forwardRef<HTMLDivElement, PhoneNumberProps>(
   (props: PhoneNumberProps, ref): React.JSX.Element => {
     const {
-      // Props consumed locally in this component
-      error = false,
-      disabled = false,
-      variant = "standard",
+      // ── Phone-number-specific props (not forwarded to TextField) ──
+      excludeCountries,
+      onlyCountries,
+      preferredCountries,
+      defaultCountry,
+      value,
       native = false,
       dropdownClass = "",
       slotProps = EMPTY_SLOT_PROPS,
       inputRef,
+      autoFormat,
+      disableAreaCodes,
+      disableCountryCode,
       disableDropdown = false,
+      enableLongNumbers,
+      countryCodeEditable,
+      regions,
       localization = EMPTY_LOCALIZATION,
-      // Standard TextField props — forwarded explicitly
-      label,
-      helperText,
-      fullWidth,
-      className,
-      sx,
-      size,
-      color,
-      name,
-      id,
-      required,
+      onChange,
+      onFocus,
+      onBlur,
+      onClick,
+      isValid,
+      // ── TextField props with local defaults or custom handling ──
+      error = false,
+      disabled = false,
+      variant = "standard",
+      // ── Remaining TextField props forwarded via spread ──
+      ...textFieldProps
     } = props;
     const inputSlotProps = slotProps.input ?? {};
     const htmlInputSlotProps = slotProps.htmlInput ?? {};
@@ -98,16 +126,7 @@ const MaterialUiPhoneNumber = forwardRef<HTMLDivElement, PhoneNumberProps>(
     return (
       <TextField
         ref={ref}
-        label={label}
-        helperText={helperText}
-        fullWidth={fullWidth}
-        className={className}
-        sx={sx}
-        size={size}
-        color={color}
-        name={name}
-        id={id}
-        required={required}
+        {...textFieldProps}
         placeholder={state.placeholder}
         value={state.formattedNumber}
         error={isError}
