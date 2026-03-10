@@ -13,7 +13,7 @@ import {
 
 import { allCountries } from "../../country_data";
 import { buildLogger, type Logger } from "../../logger/client";
-import { MAX_PHONE_DIGITS, defaultKeys } from "./constants";
+import { MAX_PHONE_DIGITS } from "./constants";
 import type { Country, PhoneNumberProps, PhoneNumberState } from "./types";
 import {
   buildInitialState,
@@ -72,8 +72,6 @@ export const usePhoneNumberState = (
     onBlur,
     onClick,
     onKeyDown,
-    onEnterKeyPress,
-    keys = defaultKeys,
   } = props;
 
   const excludeCountries = excludeCountriesProp ?? EMPTY_COUNTRY_LIST;
@@ -472,15 +470,11 @@ export const usePhoneNumberState = (
 
   const handleInputKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>): void => {
-      if (event.key === keys.ENTER && onEnterKeyPress) {
-        onEnterKeyPress(event);
-      }
-
       if (onKeyDown) {
         onKeyDown(event);
       }
     },
-    [keys.ENTER, onEnterKeyPress, onKeyDown],
+    [onKeyDown],
   );
 
   const handleClose = useCallback((): void => {

@@ -12,16 +12,27 @@ const EMPTY_SLOT_PROPS: NonNullable<PhoneNumberProps["slotProps"]> = {};
 const MaterialUiPhoneNumber = forwardRef<HTMLDivElement, PhoneNumberProps>(
   (props: PhoneNumberProps, ref): React.JSX.Element => {
     const {
-      disabled = false,
+      // Props consumed locally in this component
       error = false,
+      disabled = false,
       variant = "standard",
       native = false,
-      inputClass = "",
       dropdownClass = "",
       slotProps = EMPTY_SLOT_PROPS,
       inputRef,
       disableDropdown = false,
       localization = EMPTY_LOCALIZATION,
+      // Standard TextField props — forwarded explicitly
+      label,
+      helperText,
+      fullWidth,
+      className,
+      sx,
+      size,
+      color,
+      name,
+      id,
+      required,
     } = props;
     const inputSlotProps = slotProps.input ?? {};
     const htmlInputSlotProps = slotProps.htmlInput ?? {};
@@ -87,9 +98,18 @@ const MaterialUiPhoneNumber = forwardRef<HTMLDivElement, PhoneNumberProps>(
     return (
       <TextField
         ref={ref}
+        label={label}
+        helperText={helperText}
+        fullWidth={fullWidth}
+        className={className}
+        sx={sx}
+        size={size}
+        color={color}
+        name={name}
+        id={id}
+        required={required}
         placeholder={state.placeholder}
         value={state.formattedNumber}
-        className={inputClass}
         error={isError}
         onChange={handleInput}
         onClick={handleInputClick}
