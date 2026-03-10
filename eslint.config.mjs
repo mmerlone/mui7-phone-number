@@ -41,7 +41,6 @@ export default [
       "no-console": "error",
       "no-debugger": "error",
       "no-implicit-coercion": "error",
-      "no-return-await": "error",
       "no-duplicate-imports": "error",
       "no-var": "error",
       "prefer-const": "error",
@@ -105,12 +104,16 @@ export default [
       ...typescript.configs.recommended.rules,
 
       // Strict TypeScript rules
-      "@typescript-eslint/no-unused-vars": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { ignoreRestSiblings: true },
+      ],
       "@typescript-eslint/no-use-before-define": "error",
       "@typescript-eslint/no-shadow": "error",
       "@typescript-eslint/no-redeclare": "error",
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-unnecessary-type-assertion": "error",
+      "@typescript-eslint/return-await": ["error", "in-try-catch"],
 
       // Type safety
       "@typescript-eslint/no-unsafe-assignment": "error",
