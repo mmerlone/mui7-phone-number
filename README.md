@@ -94,11 +94,12 @@ function MyForm() {
 
 ### TextField passthrough
 
+`MuiPhoneNumber` extends `TextFieldProps` (minus internally-managed keys), so standard MUI TextField props like `label`, `helperText`, `fullWidth`, `className`, `sx`, `size`, `color`, `name`, `id`, `required`, `variant`, `disabled`, and `placeholder` are forwarded automatically.
+
+Additional phone-specific layout props:
+
 | Prop | Type | Description |
 |---|---|---|
-| `variant` | `"standard" \| "outlined" \| "filled"` | MUI TextField variant (default: `"standard"`) |
-| `disabled` | `boolean` | Disable the input |
-| `inputClass` | `string` | Class name applied to the TextField root |
 | `dropdownClass` | `string` | Class name applied to the country dropdown container |
 | `slotProps` | `{ input?, htmlInput? }` | MUI v7 `slotProps` forwarded to the TextField |
 | `inputRef` | `Ref<HTMLInputElement>` | Ref forwarded to the underlying `<input>` element |
@@ -111,8 +112,6 @@ function MyForm() {
 | `onFocus` | `(event, country: CountryData) => void` | — |
 | `onBlur` | `(event, country: CountryData) => void` | — |
 | `onClick` | `(event, country: CountryData) => void` | — |
-| `onKeyDown` | `(event) => void` | `CountryData` is not provided here |
-| `onEnterKeyPress` | `(event) => void` | Convenience handler for the Enter key |
 
 The `CountryData` object shape:
 
@@ -124,29 +123,13 @@ interface CountryData {
 }
 ```
 
-### Keyboard
+## Exports
 
-| Prop | Type | Description |
-|---|---|---|
-| `keys` | `Partial<KeyboardKeys>` | Remap the keyboard shortcuts used inside the component (see [Keyboard customisation](#keyboard-customisation)) |
-
-### Keyboard customisation
-
-The `keys` prop lets you remap the keyboard shortcuts used inside the component (defaults shown):
+The package exports the default component and two useful types:
 
 ```ts
-{
-  UP: 'ArrowUp',
-  DOWN: 'ArrowDown',
-  RIGHT: 'ArrowRight',
-  LEFT: 'ArrowLeft',
-  ENTER: 'Enter',
-  ESC: 'Escape',
-  PLUS: '+',
-  A: 'a',
-  Z: 'z',
-  SPACE: ' ',
-}
+import MuiPhoneNumber from '@mmerlone/mui7-phone-number';
+import type { PhoneNumberProps, CountryData } from '@mmerlone/mui7-phone-number';
 ```
 
 ## Regions

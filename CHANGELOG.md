@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-03-09
+### Changed
+- **BREAKING**: `PhoneNumberProps` now extends `Omit<TextFieldProps, …>` — standard TextField props (`label`, `helperText`, `fullWidth`, `sx`, `size`, `color`, `name`, `id`, `required`, etc.) are forwarded automatically
+- externalize all `@mui/*` subpaths via regex function instead of explicit list
+- drop UMD build format — distribute ES module only
+
+### Removed
+- **BREAKING**: `inputClass` prop — use `className` (inherited from TextField) instead
+- **BREAKING**: `onEnterKeyPress` prop and `keys` prop — use `onKeyDown` directly
+- `Keys` interface and `defaultKeys` constant (unused internals)
+
+### Added
+- export `CountryData` and `PhoneNumberProps` types from package entry point
+- JSDoc comments on all public props
+
+## [1.0.0] - 2026-03-07
+### Changed
+- stable release
+
 ## [0.0.1] - 2026-03-05
 ### Added
-- Initial release — phone number input component for MUI v7+ and React 19, written in TypeScript
+- initial release — phone number input component for MUI v7+ and React 19, written in TypeScript
