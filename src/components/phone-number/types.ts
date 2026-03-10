@@ -1,6 +1,7 @@
 import type { FocusEvent, MouseEvent, Ref } from "react";
 import type { TextFieldProps } from "@mui/material/TextField";
 
+/** Normalized country entry used internally by the phone number component. */
 export interface Country {
   name: string;
   iso2: string;
@@ -11,9 +12,13 @@ export interface Country {
   regions?: string[];
 }
 
+/** Simplified country metadata exposed to consumer callbacks (onChange, onFocus, etc.). */
 export interface CountryData {
+  /** Country display name. */
   name: string;
+  /** International dial code without the leading "+". */
   dialCode: string;
+  /** ISO 3166-1 alpha-2 country code. */
   countryCode: string;
 }
 
@@ -98,20 +103,28 @@ export interface PhoneNumberCustomProps {
  * Props accepted by the `MuiPhoneNumber` component.
  *
  * Extends MUI `TextFieldProps` (minus internally-managed keys) with
- * phone-number-specific props. Standard TextField props like `label`,
- * `helperText`, `fullWidth`, `className`, `sx`, `size`, `color`, `name`,
- * `id`, and `required` are forwarded to the inner TextField automatically.
+ * phone-number-specific props. All remaining `TextFieldProps` are forwarded
+ * to the inner `TextField` via spread.
  */
 export type PhoneNumberProps = Omit<TextFieldProps, OmittedTextFieldProps> &
   PhoneNumberCustomProps;
 
+/** Internal state managed by {@link usePhoneNumberState}. */
 export interface PhoneNumberState {
+  /** The formatted phone number string displayed in the input. */
   formattedNumber: string;
+  /** Placeholder text shown when the input is empty. */
   placeholder: string;
+  /** Filtered list of countries available in the dropdown. */
   onlyCountries: Country[];
+  /** Countries pinned to the top of the dropdown. */
   preferredCountries: Country[];
+  /** ISO 3166-1 alpha-2 code for the fallback country. */
   defaultCountry: string;
+  /** Currently selected country, or `null` if none. */
   selectedCountry: Country | null;
+  /** When `true`, country auto-detection from dial code is suppressed. */
   freezeSelection: boolean;
+  /** DOM element anchoring the country dropdown menu, or `null` when closed. */
   anchorEl: HTMLElement | null;
 }
