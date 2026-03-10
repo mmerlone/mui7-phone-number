@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/// <reference types="vite/client" />
 /**
  * Client-Side Logger
  *
@@ -50,7 +49,8 @@ export interface Logger {
   child: (context: LoggerContext) => Logger;
 }
 
-const isProduction = import.meta.env.MODE === "production";
+const isProduction =
+  typeof process !== "undefined" && process.env.NODE_ENV === "production";
 const shouldEnableLogging = !isProduction;
 
 /**

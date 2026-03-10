@@ -10,16 +10,16 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite build --watch",
+    "dev": "tsc -p tsconfig.build.json --watch",
     "demo": "pnpm -C demo run dev",
     "demo:build": "pnpm -C demo run build",
     "demo:preview": "pnpm -C demo run preview",
     "prepare": "husky",
-    "build": "vite build",
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rm -rf dist",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "type-check": "tsc --noEmit",
-    "preview": "vite preview"
+    "type-check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -49,7 +49,6 @@
     "@types/react": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
-    "@vitejs/plugin-react": "^4.3.0",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-import": "^2.31.0",
@@ -58,9 +57,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "globals": "^15.0.0",
     "husky": "^9.1.7",
-    "typescript": "^5.7.0",
-    "vite": "^6.0.0",
-    "vite-plugin-dts": "^4.0.0"
+    "typescript": "^5.7.0"
   },
   "dependencies": {
     "country-flag-icons": "^1.5.11"
