@@ -16,10 +16,11 @@
  * ['america', 'europe', 'asia', 'oceania', 'africa']
  *
  * Sub-regions:
- * ['north-america', 'south-america', 'central-america', 'carribean',
+ * ['north-america', 'south-america', 'central-america', 'caribbean',
  *  'european-union', 'ex-ussr', 'middle-east', 'north-africa']
  */
 
+/** Raw tuple format for defining a country entry in the static data table. */
 type CountryRawData = [
   name: string,
   regions: string[],
@@ -30,6 +31,7 @@ type CountryRawData = [
   areaCodes?: string[],
 ];
 
+/** Normalized country object produced from {@link CountryRawData} after processing. */
 interface CountryItem {
   name: string;
   regions: string[];
@@ -48,18 +50,18 @@ const rawAllCountries: CountryRawData[] = [
   ["American Samoa", ["oceania"], "as", "1684"],
   ["Andorra", ["europe"], "ad", "376"],
   ["Angola", ["africa"], "ao", "244"],
-  ["Anguilla", ["america", "carribean"], "ai", "1264"],
-  ["Antigua and Barbuda", ["america", "carribean"], "ag", "1268"],
+  ["Anguilla", ["america", "caribbean"], "ai", "1264"],
+  ["Antigua and Barbuda", ["america", "caribbean"], "ag", "1268"],
   ["Argentina", ["america", "south-america"], "ar", "54", "+.. (..) ........"],
   ["Armenia", ["asia", "ex-ussr"], "am", "374"],
-  ["Aruba", ["america", "carribean"], "aw", "297"],
+  ["Aruba", ["america", "caribbean"], "aw", "297"],
   ["Australia", ["oceania"], "au", "61", "+.. ... ... ..."],
   ["Austria", ["europe", "european-union"], "at", "43"],
   ["Azerbaijan", ["asia", "ex-ussr"], "az", "994"],
-  ["Bahamas", ["america", "carribean"], "bs", "1242"],
+  ["Bahamas", ["america", "caribbean"], "bs", "1242"],
   ["Bahrain", ["middle-east"], "bh", "973"],
   ["Bangladesh", ["asia"], "bd", "880"],
-  ["Barbados", ["america", "carribean"], "bb", "1246"],
+  ["Barbados", ["america", "caribbean"], "bb", "1246"],
   ["Belarus", ["europe", "ex-ussr"], "by", "375", "+... (..) ... .. .."],
   ["Belgium", ["europe", "european-union"], "be", "32", "+.. ... .. .. .."],
   ["Belize", ["america", "central-america"], "bz", "501"],
@@ -77,7 +79,7 @@ const rawAllCountries: CountryRawData[] = [
     ["+.. (..) ....-....", "+.. (..) .....-...."],
   ],
   ["British Indian Ocean Territory", ["asia"], "io", "246"],
-  ["British Virgin Islands", ["america", "carribean"], "vg", "1284"],
+  ["British Virgin Islands", ["america", "caribbean"], "vg", "1284"],
   ["Brunei", ["asia"], "bn", "673"],
   ["Bulgaria", ["europe", "european-union"], "bg", "359"],
   ["Burkina Faso", ["africa"], "bf", "226", "+... .. .. .. .."],
@@ -136,8 +138,8 @@ const rawAllCountries: CountryRawData[] = [
     ],
   ],
   ["Cape Verde", ["africa"], "cv", "238", "+... ... .. .."],
-  ["Caribbean Netherlands", ["america", "carribean"], "bq", "599", "", 1],
-  ["Cayman Islands", ["america", "carribean"], "ky", "1345"],
+  ["Caribbean Netherlands", ["america", "caribbean"], "bq", "599", "", 1],
+  ["Cayman Islands", ["america", "caribbean"], "ky", "1345"],
   ["Central African Republic", ["africa"], "cf", "236", "+... .... ...."],
   ["Chad", ["africa"], "td", "235", "+... .. .. .. .."],
   ["Chile", ["america", "south-america"], "cl", "56"],
@@ -150,16 +152,16 @@ const rawAllCountries: CountryRawData[] = [
   ["Costa Rica", ["america", "central-america"], "cr", "506", "+... ....-...."],
   ["Côte d'Ivoire", ["africa"], "ci", "225", "+... .. .. .. .."],
   ["Croatia", ["europe", "european-union"], "hr", "385"],
-  ["Cuba", ["america", "carribean"], "cu", "53"],
-  ["Curaçao", ["america", "carribean"], "cw", "599", "", 0],
+  ["Cuba", ["america", "caribbean"], "cu", "53"],
+  ["Curaçao", ["america", "caribbean"], "cw", "599", "", 0],
   ["Cyprus", ["europe", "european-union"], "cy", "357", "+... .. ......"],
   ["Czech Republic", ["europe", "european-union"], "cz", "420"],
   ["Denmark", ["europe", "european-union"], "dk", "45", "+.. .. .. .. .."],
   ["Djibouti", ["africa"], "dj", "253"],
-  ["Dominica", ["america", "carribean"], "dm", "1767"],
+  ["Dominica", ["america", "caribbean"], "dm", "1767"],
   [
     "Dominican Republic",
-    ["america", "carribean"],
+    ["america", "caribbean"],
     "do",
     "1",
     "",
@@ -200,14 +202,14 @@ const rawAllCountries: CountryRawData[] = [
   ["Gibraltar", ["europe"], "gi", "350"],
   ["Greece", ["europe", "european-union"], "gr", "30"],
   ["Greenland", ["america"], "gl", "299"],
-  ["Grenada", ["america", "carribean"], "gd", "1473"],
-  ["Guadeloupe", ["america", "carribean"], "gp", "590", "", 0],
+  ["Grenada", ["america", "caribbean"], "gd", "1473"],
+  ["Guadeloupe", ["america", "caribbean"], "gp", "590", "", 0],
   ["Guam", ["oceania"], "gu", "1671"],
   ["Guatemala", ["america", "central-america"], "gt", "502", "+... ....-...."],
   ["Guinea", ["africa"], "gn", "224", "+... . ... ...."],
   ["Guinea-Bissau", ["africa"], "gw", "245"],
   ["Guyana", ["america", "south-america"], "gy", "592"],
-  ["Haiti", ["america", "carribean"], "ht", "509", "+... ....-...."],
+  ["Haiti", ["america", "caribbean"], "ht", "509", "+... ....-...."],
   ["Honduras", ["america", "central-america"], "hn", "504"],
   ["Hong Kong", ["asia"], "hk", "852", "+... .... ...."],
   ["Hungary", ["europe", "european-union"], "hu", "36"],
@@ -219,7 +221,7 @@ const rawAllCountries: CountryRawData[] = [
   ["Ireland", ["europe", "european-union"], "ie", "353", "+... .. ......."],
   ["Israel", ["middle-east"], "il", "972", "+... ... ... ...."],
   ["Italy", ["europe", "european-union"], "it", "39", "+.. ... .......", 0],
-  ["Jamaica", ["america", "carribean"], "jm", "1876"],
+  ["Jamaica", ["america", "caribbean"], "jm", "1876"],
   ["Japan", ["asia"], "jp", "81", "+.. .. .... ...."],
   ["Jordan", ["middle-east"], "jo", "962"],
   [
@@ -275,7 +277,7 @@ const rawAllCountries: CountryRawData[] = [
   ["Mali", ["africa"], "ml", "223", "+... .... ...."],
   ["Malta", ["europe", "european-union"], "mt", "356"],
   ["Marshall Islands", ["oceania"], "mh", "692"],
-  ["Martinique", ["america", "carribean"], "mq", "596"],
+  ["Martinique", ["america", "caribbean"], "mq", "596"],
   ["Mauritania", ["africa"], "mr", "222", "+... .... ...."],
   ["Mauritius", ["africa"], "mu", "230", "+... . ... ...."],
   ["Mexico", ["america", "central-america"], "mx", "52"],
@@ -284,7 +286,7 @@ const rawAllCountries: CountryRawData[] = [
   ["Monaco", ["europe"], "mc", "377"],
   ["Mongolia", ["asia"], "mn", "976"],
   ["Montenegro", ["europe"], "me", "382"],
-  ["Montserrat", ["america", "carribean"], "ms", "1664"],
+  ["Montserrat", ["america", "caribbean"], "ms", "1664"],
   ["Morocco", ["africa", "north-africa"], "ma", "212", "+212-........."],
   ["Mozambique", ["africa"], "mz", "258", "+... ... ......"],
   ["Myanmar", ["asia"], "mm", "95"],
@@ -313,19 +315,19 @@ const rawAllCountries: CountryRawData[] = [
   ["Philippines", ["asia"], "ph", "63", "+.. .... ......."],
   ["Poland", ["europe", "european-union"], "pl", "48", "+.. ...-...-..."],
   ["Portugal", ["europe", "european-union"], "pt", "351"],
-  ["Puerto Rico", ["america", "carribean"], "pr", "1", "", 3, ["787", "939"]],
+  ["Puerto Rico", ["america", "caribbean"], "pr", "1", "", 3, ["787", "939"]],
   ["Qatar", ["middle-east"], "qa", "974"],
   ["Réunion", ["africa"], "re", "262", "+.. . .. .. .. .."],
   ["Romania", ["europe", "european-union"], "ro", "40"],
   ["Russia", ["europe", "asia", "ex-ussr"], "ru", "7", "+. (...) ...-..-..", 0],
   ["Rwanda", ["africa"], "rw", "250", "+... ... ... ..."],
-  ["Saint Barthélemy", ["america", "carribean"], "bl", "590", "", 1],
+  ["Saint Barthélemy", ["america", "caribbean"], "bl", "590", "", 1],
   ["Saint Helena", ["africa"], "sh", "290"],
-  ["Saint Kitts and Nevis", ["america", "carribean"], "kn", "1869"],
-  ["Saint Lucia", ["america", "carribean"], "lc", "1758"],
-  ["Saint Martin", ["america", "carribean"], "mf", "590", "", 2],
+  ["Saint Kitts and Nevis", ["america", "caribbean"], "kn", "1869"],
+  ["Saint Lucia", ["america", "caribbean"], "lc", "1758"],
+  ["Saint Martin", ["america", "caribbean"], "mf", "590", "", 2],
   ["Saint Pierre and Miquelon", ["america", "north-america"], "pm", "508"],
-  ["Saint Vincent and the Grenadines", ["america", "carribean"], "vc", "1784"],
+  ["Saint Vincent and the Grenadines", ["america", "caribbean"], "vc", "1784"],
   ["Samoa", ["oceania"], "ws", "685"],
   ["San Marino", ["europe"], "sm", "378"],
   ["São Tomé and Príncipe", ["africa"], "st", "239", "+... ... ...."],
@@ -341,7 +343,7 @@ const rawAllCountries: CountryRawData[] = [
   ],
   ["Sierra Leone", ["africa"], "sl", "232"],
   ["Singapore", ["asia"], "sg", "65", "+.. ....-...."],
-  ["Sint Maarten", ["america", "carribean"], "sx", "1721"],
+  ["Sint Maarten", ["america", "caribbean"], "sx", "1721"],
   ["Slovakia", ["europe", "european-union"], "sk", "421"],
   ["Slovenia", ["europe", "european-union"], "si", "386"],
   ["Solomon Islands", ["oceania"], "sb", "677"],
@@ -365,13 +367,13 @@ const rawAllCountries: CountryRawData[] = [
   ["Togo", ["africa"], "tg", "228", "+... ... ....."],
   ["Tokelau", ["oceania"], "tk", "690"],
   ["Tonga", ["oceania"], "to", "676"],
-  ["Trinidad and Tobago", ["america", "carribean"], "tt", "1868"],
+  ["Trinidad and Tobago", ["america", "caribbean"], "tt", "1868"],
   ["Tunisia", ["africa", "north-africa"], "tn", "216", "+... .. ... ..."],
   ["Turkey", ["europe"], "tr", "90", "+.. ... ... .. .."],
   ["Turkmenistan", ["asia", "ex-ussr"], "tm", "993"],
-  ["Turks and Caicos Islands", ["america", "carribean"], "tc", "1649"],
+  ["Turks and Caicos Islands", ["america", "caribbean"], "tc", "1649"],
   ["Tuvalu", ["oceania"], "tv", "688"],
-  ["U.S. Virgin Islands", ["america", "carribean"], "vi", "1340"],
+  ["U.S. Virgin Islands", ["america", "caribbean"], "vi", "1340"],
   ["Uganda", ["africa"], "ug", "256"],
   ["Ukraine", ["europe", "ex-ussr"], "ua", "380", "+... (..) ... .. .."],
   ["United Arab Emirates", ["middle-east"], "ae", "971"],
@@ -639,8 +641,19 @@ const rawAllCountries: CountryRawData[] = [
   ["Zimbabwe", ["africa"], "zw", "263"],
 ];
 
+/** Lookup table mapping dial codes to an array of ISO 3166-1 alpha-2 country codes, sorted by priority. */
 const allCountryCodes: Record<string, string[]> = {};
 
+/** Tracks the priority assigned to each (dialCode, iso2) pair for later sorting. */
+const countryPriorities: Map<string, number> = new Map();
+
+/**
+ * Register an ISO 3166-1 alpha-2 code under a dial code in {@link allCountryCodes}.
+ *
+ * @param iso2 - Country code (e.g. `"us"`).
+ * @param dialCode - International dial code (e.g. `"1"`).
+ * @param priority - Optional priority for countries sharing a dial code (lower = first).
+ */
 function addCountryCode(
   iso2: string,
   dialCode: string,
@@ -649,10 +662,15 @@ function addCountryCode(
   if (!(dialCode in allCountryCodes)) {
     allCountryCodes[dialCode] = [];
   }
-  const index = priority ?? 0;
-  allCountryCodes[dialCode][index] = iso2;
+  if (!allCountryCodes[dialCode].includes(iso2)) {
+    allCountryCodes[dialCode].push(iso2);
+  }
+  if (priority !== undefined) {
+    countryPriorities.set(`${dialCode}:${iso2}`, priority);
+  }
 }
 
+/** Complete list of countries (and area-code sub-entries) derived from the raw data table. */
 const allCountries: CountryItem[] = rawAllCountries.flatMap(
   (country): CountryItem[] => {
     const [name, regions, iso2, dialCode, format, priority, areaCodes] =
@@ -694,5 +712,14 @@ const allCountries: CountryItem[] = rawAllCountries.flatMap(
     return areaItems.length > 0 ? [countryItem, ...areaItems] : [countryItem];
   },
 );
+
+// Sort each dial-code bucket by priority (lower = first)
+for (const dialCode of Object.keys(allCountryCodes)) {
+  allCountryCodes[dialCode].sort((a, b) => {
+    const pa = countryPriorities.get(`${dialCode}:${a}`) ?? 0;
+    const pb = countryPriorities.get(`${dialCode}:${b}`) ?? 0;
+    return pa - pb;
+  });
+}
 
 export { allCountries, allCountryCodes };
