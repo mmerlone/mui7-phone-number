@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING**: `PhoneNumberProps` now extends `Omit<TextFieldProps, …>` — standard TextField props (`label`, `helperText`, `fullWidth`, `sx`, `size`, `color`, `name`, `id`, `required`, etc.) are forwarded automatically
 - externalize all `@mui/*` subpaths via regex function instead of explicit list
 - drop UMD build format — distribute ES module only
+- move `@emotion/react`, `@emotion/styled`, `@mui/material` to devDependencies so the library builds without installing peer deps locally
+- hardcode eslint react version to "19" since react is no longer installed as a dependency
+- add `.npmrc` with `auto-install-peers=false` to prevent pnpm from auto-installing react/react-dom alongside the host app
 
 ### Removed
 - **BREAKING**: `inputClass` prop — use `className` (inherited from TextField) instead

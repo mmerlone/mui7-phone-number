@@ -70,7 +70,7 @@ export default [
       },
     },
     settings: {
-      react: { version: "detect" },
+      react: { version: "19" },
     },
     rules: {
       ...react.configs.recommended.rules,
