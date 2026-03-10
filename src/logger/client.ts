@@ -20,7 +20,7 @@
  * @module logger/client
  */
 
-/** Log level enumeration */
+/** Enumeration of supported log severity levels. */
 export const LogLevelEnum = {
   TRACE: "trace",
   DEBUG: "debug",
@@ -30,15 +30,15 @@ export const LogLevelEnum = {
   FATAL: "fatal",
 } as const;
 
-/** Log level type derived from LogLevelEnum */
+/** Log level string literal type derived from {@link LogLevelEnum} values. */
 export type LogLevel = (typeof LogLevelEnum)[keyof typeof LogLevelEnum];
 
-/** Context object for structured logging */
+/** Context object for structured logging — keys are metadata fields, values are serializable data. */
 export interface LoggerContext {
   [key: string]: unknown;
 }
 
-/** Logger interface providing structured logging capabilities */
+/** Logger interface providing Pino-compatible structured logging capabilities. */
 export interface Logger {
   trace: (context: LoggerContext, message: string) => void;
   debug: (context: LoggerContext, message: string) => void;
@@ -124,20 +124,21 @@ const createConsoleLogger = (baseContext: LoggerContext = {}): Logger => {
     if (!shouldEnableLogging) return;
 
     const mergedContext = { ...baseContext, ...context };
+    const sanitizedContext: LoggerContext = { ...mergedContext };
 
     // Automatically mask email for PII compliance
-    if (typeof mergedContext.email === "string") {
-      mergedContext.email = maskEmail(mergedContext.email);
+    if (typeof sanitizedContext.email === "string") {
+      sanitizedContext.email = maskEmail(sanitizedContext.email);
     }
 
     const timestamp = new Date().toISOString();
 
     // Format error if present
-    if (mergedContext.err instanceof Error) {
-      mergedContext.err = {
-        message: mergedContext.err.message,
-        stack: mergedContext.err.stack,
-        name: mergedContext.err.name,
+    if (sanitizedContext.err instanceof Error) {
+      sanitizedContext.err = {
+        message: sanitizedContext.err.message,
+        stack: sanitizedContext.err.stack,
+        name: sanitizedContext.err.name,
       };
     }
 
