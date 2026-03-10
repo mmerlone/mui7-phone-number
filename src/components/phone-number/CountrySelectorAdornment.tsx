@@ -10,6 +10,7 @@ import SvgIcon from "@mui/material/SvgIcon";
 import type { Country } from "./types";
 import { buildLogger, type Logger } from "../../logger/client";
 
+/** Props for the {@link CountrySelectorAdornment} component. */
 interface CountrySelectorAdornmentProps {
   anchorEl: HTMLElement | null;
   dropdownClass: string;
@@ -25,10 +26,18 @@ interface CountrySelectorAdornmentProps {
 
 const logger: Logger = buildLogger("country-selector");
 
+/** React component type for an SVG country-flag icon. */
 type FlagComponentType = React.ComponentType<
   React.SVGProps<SVGSVGElement> & { title?: string }
 >;
 
+/**
+ * Resolve a country's display name, applying the consumer-provided localization map.
+ *
+ * @param country - Country entry.
+ * @param localization - Map of country name overrides (key = English name).
+ * @returns Localized country name, or the original name if no override exists.
+ */
 const getLocalizedName = (
   country: Country,
   localization: Record<string, string>,
@@ -36,6 +45,13 @@ const getLocalizedName = (
   return localization[country.name] ?? country.name;
 };
 
+/**
+ * Input adornment that renders a country flag button and a dropdown selector.
+ *
+ * Supports both a MUI `Menu`-based dropdown and a native `<select>` fallback
+ * for mobile/accessibility scenarios. Countries are sorted alphabetically by
+ * localized name, with preferred countries pinned at the top.
+ */
 export const CountrySelectorAdornment = ({
   anchorEl,
   dropdownClass,
@@ -128,10 +144,7 @@ export const CountrySelectorAdornment = ({
             size="small"
           >
             {SelectedFlag ? (
-              <SelectedFlag
-                className="margin"
-                style={{ width: 24, height: 16 }}
-              />
+              <SelectedFlag style={{ width: 24, height: 16 }} />
             ) : (
               <SvgIcon
                 titleAccess="No country selected"
