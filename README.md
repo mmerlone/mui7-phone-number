@@ -1,5 +1,9 @@
 # @mmerlone/mui7-phone-number
 
+[![npm version](https://img.shields.io/npm/v/@mmerlone/mui7-phone-input.svg)](https://www.npmjs.com/package/@mmerlone/mui7-phone-input)
+[![npm downloads](https://img.shields.io/npm/dm/@mmerlone/mui7-phone-input.svg)](https://www.npmjs.com/package/@mmerlone/mui7-phone-input)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A phone number input component for [MUI v7+](https://mui.com/) with auto-formatting, country selection, and full TypeScript support.
 
 Built on top of `@mui/material/TextField`, rendering a country flag selector as a start adornment alongside the formatted phone input.
