@@ -6,6 +6,8 @@ Built on top of `@mui/material/TextField`, rendering a country flag selector as 
 
 This is a fork of [mui-phone-number](https://github.com/alexplumb/material-ui-phone-number) updated to support MUI v7, React 19, and modern TypeScript.
 
+![Sample](sample.png)
+
 ## Requirements
 
 - React 19+
