@@ -1,6 +1,6 @@
 {
   "name": "@mmerlone/mui7-phone-number",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Phone number input component compatible with MUI v7",
   "author": "Marcio Merlone <mmerlone@gmail.com> (https://mmerlone.dev.br)",
   "main": "dist/index.js",
