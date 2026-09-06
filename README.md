@@ -14,6 +14,8 @@ This is a fork of [mui-phone-number](https://github.com/alexplumb/material-ui-ph
 
 [Live Demo](https://ywybase.vercel.app/demos/mui7-phone-number)
 
+Created and maintained by [Marcio Merlone](https://mmerlone.dev.br)
+
 ## Requirements
 
 - React 19+
